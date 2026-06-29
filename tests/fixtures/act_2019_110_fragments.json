@@ -1,0 +1,159 @@
+{
+  "head": {
+    "link": [],
+    "vars": [
+      "text",
+      "order"
+    ]
+  },
+  "results": {
+    "distinct": false,
+    "ordered": true,
+    "bindings": [
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "110"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "5AC0"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "ZÁKON"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "5B40"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "ze dne 12. března 2019"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "5BC0"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "o zpracování osobních údajů"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "5C20"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Parlament se usnesl na tomto zákoně České republiky:"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "5C60"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "<var>ČÁST PRVNÍ</var>"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "6AC0"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "ZPRACOVÁNÍ OSOBNÍCH ÚDAJŮ"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "6AD6"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "<var>HLAVA I</var>"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "6ADA"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "ZÁKLADNÍ USTANOVENÍ"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "6ADAB0"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "<var>§ 1</var>"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "6ADAD0"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Předmět úpravy"
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "6ADAD580"
+        }
+      },
+      {
+        "text": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Tento zákon zapracovává příslušné předpisy Evropské unie<a data-odkaz-id=\"40358903\" href=\"#\" class=\"int_odkaz\"><sup>1</sup>)</a>, zároveň navazuje na přímo použitelný předpis Evropské unie<a data-odkaz-id=\"40358907\" href=\"#\" class=\"int_odkaz\"><sup>2</sup>)</a> a k naplnění práva každého na ochranu soukromí upravuje práva a povinnosti při zpracování osobních údajů."
+        },
+        "order": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "6ADAD680"
+        }
+      }
+    ]
+  }
+}

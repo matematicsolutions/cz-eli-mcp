@@ -1,0 +1,43 @@
+{
+  "head": {
+    "link": [],
+    "vars": [
+      "act",
+      "citation",
+      "year",
+      "number",
+      "ver"
+    ]
+  },
+  "results": {
+    "distinct": false,
+    "ordered": true,
+    "bindings": [
+      {
+        "act": {
+          "type": "uri",
+          "value": "https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110"
+        },
+        "citation": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "110/2019 Sb."
+        },
+        "year": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "value": "2019"
+        },
+        "number": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "110"
+        },
+        "ver": {
+          "type": "uri",
+          "value": "https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110/2025-08-01"
+        }
+      }
+    ]
+  }
+}
