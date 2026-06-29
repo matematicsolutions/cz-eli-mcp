@@ -1,5 +1,7 @@
 # cz-eli-mcp
 
+<!-- mcp-name: io.github.matematicsolutions/cz-eli-mcp -->
+
 An MCP server for the Czech **e-Sbirka** legal database (`e-sbirka.gov.cz`), the official
 Collection of Laws (Sbirka zakonu), via its open-data **SPARQL** endpoint. It searches acts and
 fetches their full consolidated text, with verifiable citations.

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cz-eli-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "MCP server for the Czech e-Sbirka legal database (e-sbirka.gov.cz) via SPARQL - search and fetch Czech consolidated legislation with national ELI identifiers and verifiable citations."
 readme = "README.md"
 license = { text = "Apache-2.0" }
