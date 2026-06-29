@@ -35,6 +35,14 @@ Every response carries the contract: `eli_uri` (the national ELI IRI, e.g.
 
 ## Install
 
+Run it with no install step (once published to PyPI):
+
+```bash
+uvx cz-eli-mcp
+```
+
+Or from source:
+
 ```bash
 cd cz-eli-mcp
 pip install -e .
