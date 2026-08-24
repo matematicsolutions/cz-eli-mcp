@@ -36,6 +36,7 @@ This MCP server exposes the Czech e-Sbirka legal database (e-sbirka.gov.cz), the
 
 ## Hard constraints
 
+- **Do not answer past the edge of this corpus** - when a search comes back empty, or the question touches material this connector does not carry, call `cz_coverage` and relay what it says is missing. Absence here is not absence in the law.
 - **ELI is national, not data.europa.eu** - `eli_uri` is the Czech ELI IRI minted by the e-Sbirka graph (`opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/{year}/{number}`). It follows the ELI URI template but is not a `data.europa.eu`-resolvable identifier; the readable page is on `e-sbirka.gov.cz`. Relay the `eli_note`. Do not invent it - it is built from year + number and confirmed against the act's RDF citation.
 - **Text is assembled, not a single file** - `cz_get_text` reconstructs the consolidated text from ordered HTML fragments; there is no official single XML/PDF manifestation. Relay the `dataset_note`.
 - **Search matches the citation, not full text** - `contains` filters the citation string (e.g. "110/2019 Sb."), not the body of the law.
