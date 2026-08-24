@@ -23,6 +23,7 @@ from .audit import AuditLogger, hash_input, timer
 from .citations import assemble_text, build_act_record
 from .client import DEFAULT_ENDPOINT, CzSparqlClient
 from .models import Act, LawText, SearchHit, SearchResult
+from .coverage import Coverage, build_coverage
 
 INSTRUCTIONS = """\
 This MCP server exposes the Czech e-Sbirka legal database (e-sbirka.gov.cz), the official Collection of Laws (Sbirka zakonu), via its open-data SPARQL endpoint. It searches acts and returns their metadata and full consolidated text. Every response carries a stable `eli_uri`, a `human_readable_citation` and a `source_url` (the citation contract).
@@ -198,6 +199,20 @@ async def cz_get_act(year: int, number: int) -> Act:
 
 # ---------------------------------------------------------------------------
 # cz_get_text
+@mcp.tool(annotations=READ_ONLY)
+async def cz_coverage() -> Coverage:
+    """Declare what this connector covers, how it is sourced, and what it does NOT cover.
+
+    Call this before telling a user that the law "does not contain" something, and whenever
+    a search comes back empty: the absence may be a gap in this connector rather than in the
+    law. Every gap carries a fallback saying where to look instead.
+
+    Returns:
+        ``Coverage`` with families, an as-of note, and a non-empty list of known gaps.
+    """
+    return build_coverage()
+
+
 # ---------------------------------------------------------------------------
 
 

@@ -30,6 +30,7 @@ talks **SPARQL/RDF** rather than a REST/XML API.
 | `cz_search` | Find acts by year and/or a citation substring (discovery). |
 | `cz_get_act` | Metadata for an act by year + number, plus the latest consolidated version date. |
 | `cz_get_text` | Full consolidated text of an act, assembled from the latest version's fragments. |
+| `cz_coverage` | Declare what this connector covers, when each family was captured, and - explicitly - what it does NOT cover. Every gap carries a fallback. |
 
 Every response carries the contract: `eli_uri` (the national ELI IRI, e.g.
 `https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110`), `human_readable_citation`
