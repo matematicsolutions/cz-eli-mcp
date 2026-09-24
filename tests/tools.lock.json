@@ -1,0 +1,584 @@
+{
+  "package_version": "0.2.3",
+  "tools": {
+    "cz_coverage": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Declare what this connector covers, how it is sourced, and what it does NOT cover.\n\nCall this before telling a user that the law \"does not contain\" something, and whenever\na search comes back empty: the absence may be a gap in this connector rather than in the\nlaw. Every gap carries a fallback saying where to look instead.\n\nReturns:\n    ``Coverage`` with families, an as-of note, and a non-empty list of known gaps.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "cz_coverage",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "What this connector covers, how it is sourced, and what it does not cover.",
+          "properties": {
+            "as_of_note": {
+              "description": "States what the dates mean, and what they do not promise.",
+              "type": "string"
+            },
+            "families": {
+              "items": {
+                "additionalProperties": true,
+                "description": "One data family this connector exposes.",
+                "properties": {
+                  "captured_at": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Date this family was last captured (ISO). None when queried live."
+                  },
+                  "live": {
+                    "default": true,
+                    "description": "True when queried live instead of from a snapshot.",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "Data family, e.g. 'Federal legislation'.",
+                    "type": "string"
+                  },
+                  "source": {
+                    "description": "Official source the data comes from.",
+                    "type": "string"
+                  },
+                  "tool": {
+                    "description": "Tool or tools that reach this family.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "tool",
+                  "source"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "known_gaps": {
+              "description": "Never empty. An empty list would mean 'not checked', not 'no gaps'.",
+              "items": {
+                "additionalProperties": true,
+                "description": "A known, named hole in this connector's coverage - plus the way around it.",
+                "properties": {
+                  "fallback": {
+                    "description": "Where to go instead.",
+                    "type": "string"
+                  },
+                  "family": {
+                    "description": "Which family the gap belongs to.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Stable gap identifier.",
+                    "type": "string"
+                  },
+                  "missing": {
+                    "description": "What is NOT available through this connector.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "family",
+                  "missing",
+                  "fallback"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "status": {
+              "default": "ok",
+              "enum": [
+                "ok",
+                "degraded",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "as_of_note"
+          ],
+          "type": "object"
+        }
+      },
+      "sha256": "0f1059376444fa0aaf9677fcd8dba8a6fc3a7b31dc6a8c7c2359c9443ae711ad"
+    },
+    "cz_get_act": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Fetch Czech act metadata by year and number.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "number": {
+              "description": "e.g. ``110``.",
+              "type": "integer"
+            },
+            "year": {
+              "description": "e.g. ``2019``.",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "year",
+            "number"
+          ],
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "cz_get_act",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "A Czech legal act (from SPARQL metadata).",
+          "properties": {
+            "citation": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "dataset_note": {
+              "default": "e-Sbirka (the Czech Collection of Laws, Sbirka zakonu) is served as RDF via the opendata.eselpoint.gov.cz SPARQL endpoint (CC BY 4.0, ~92k acts, updated daily). Acts are addressed by year + number; the act IRI follows the ELI URI template (eli/cz/sb/{year}/{number}). cz_get_text returns the latest consolidated version's text, assembled from ordered HTML fragments - there is no single official XML/PDF file, so the text is reconstructed, not a verbatim document. Language: Czech.",
+              "type": "string"
+            },
+            "eli_note": {
+              "default": "eli_uri is the Czech national ELI IRI minted by the e-Sbirka open-data graph (opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/...). It follows the ELI URI template but is not a data.europa.eu-resolvable identifier; the human-readable page is on e-sbirka.gov.cz.",
+              "type": "string"
+            },
+            "eli_uri": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "human_readable_citation": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "latest_version_uri": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "number": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "source_url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "version_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "year": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "type": "object"
+        }
+      },
+      "sha256": "f4e554773f40bce904ddf5e41944fe84938463e5704a68146e40c104539621cb"
+    },
+    "cz_get_text": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Fetch the full consolidated text of a Czech act by year and number.\n\nThe text is assembled from the latest consolidated version's ordered HTML fragments.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "number": {
+              "description": "e.g. ``110``.",
+              "type": "integer"
+            },
+            "year": {
+              "description": "e.g. ``2019``.",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "year",
+            "number"
+          ],
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "cz_get_text",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "Result of ``cz_get_text`` (consolidated text assembled from fragments).",
+          "properties": {
+            "byte_size": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "citation": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "content": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "dataset_note": {
+              "default": "e-Sbirka (the Czech Collection of Laws, Sbirka zakonu) is served as RDF via the opendata.eselpoint.gov.cz SPARQL endpoint (CC BY 4.0, ~92k acts, updated daily). Acts are addressed by year + number; the act IRI follows the ELI URI template (eli/cz/sb/{year}/{number}). cz_get_text returns the latest consolidated version's text, assembled from ordered HTML fragments - there is no single official XML/PDF file, so the text is reconstructed, not a verbatim document. Language: Czech.",
+              "type": "string"
+            },
+            "eli_note": {
+              "default": "eli_uri is the Czech national ELI IRI minted by the e-Sbirka open-data graph (opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/...). It follows the ELI URI template but is not a data.europa.eu-resolvable identifier; the human-readable page is on e-sbirka.gov.cz.",
+              "type": "string"
+            },
+            "eli_uri": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "format": {
+              "default": "text/plain (assembled from consolidated HTML fragments)",
+              "type": "string"
+            },
+            "fragment_count": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "human_readable_citation": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "number": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "source_url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "version_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "year": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "type": "object"
+        }
+      },
+      "sha256": "710196d760d135b49f72171931858f4970266031c520faa3498d742642e41f79"
+    },
+    "cz_search": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Search Czech acts by year and/or a citation substring.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "contains": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "substring matched (case-insensitive) against the citation, e.g. ``\"110\"``."
+            },
+            "limit": {
+              "default": 50,
+              "description": "max hits (1..500, default 50).",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "description": "pagination offset (default 0).",
+              "type": "integer"
+            },
+            "year": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "restrict to a publication year, e.g. ``2019``."
+            }
+          },
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "cz_search",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "Result of ``cz_search``.",
+          "properties": {
+            "dataset_note": {
+              "default": "e-Sbirka (the Czech Collection of Laws, Sbirka zakonu) is served as RDF via the opendata.eselpoint.gov.cz SPARQL endpoint (CC BY 4.0, ~92k acts, updated daily). Acts are addressed by year + number; the act IRI follows the ELI URI template (eli/cz/sb/{year}/{number}). cz_get_text returns the latest consolidated version's text, assembled from ordered HTML fragments - there is no single official XML/PDF file, so the text is reconstructed, not a verbatim document. Language: Czech.",
+              "type": "string"
+            },
+            "items": {
+              "items": {
+                "additionalProperties": true,
+                "description": "A single act in a ``cz_search`` result.",
+                "properties": {
+                  "citation": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "eli_uri": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "human_readable_citation": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "number": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "source_url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "year": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "total": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "total"
+          ],
+          "type": "object"
+        }
+      },
+      "sha256": "5f9cf1bed4ca4f94006d9c3174dd831be52169fb1637c415917e32428fc9af30"
+    }
+  },
+  "toolset_sha256": "d31e74f9b0d7292a467cea84c03e2cce5189de6f8a3313fc49b1326b7ac3b7d9"
+}
